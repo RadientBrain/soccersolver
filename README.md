@@ -4,8 +4,8 @@
 > _"Redefining Scouting Intelligence"_ (Paper ID 36) — with real scraped economic data,  
 > multi-season historical evolution, and a full-stack web platform.
 
-**Live demo:** https://soccersolver.vercel.app  
-**API docs:** https://soccersolver-api.railway.app/docs
+**Live demo:** https://soccersolver.vercel.app (not hosted now)
+**API docs:** https://soccersolver-api.railway.app/docs (not hosted now)
 
 ---
 
