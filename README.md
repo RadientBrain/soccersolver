@@ -65,6 +65,14 @@ This gives you a fully working system in ~3 minutes.
 - Python 3.11+
 - Node.js 20+
 
+### Easiest way
+
+```bash
+bash scripts/setup.sh
+```
+
+## If you are more nerdy then follow below steps:
+
 ### 1. Clone and configure
 
 ```bash
