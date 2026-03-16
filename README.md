@@ -30,7 +30,7 @@ Here is MVP url made by @davidsuarezgnz: https://github.com/davidsuarezgnz/mit-p
 | Data source          | Static CSV (FIFA ratings) | Live SoFIFA scraper                                     |
 | Economic data        | ❌ None                   | ✅ Salary, market value, release clause                 |
 | Historical evolution | ❌ Single season          | ✅ 3 seasons (2022/23 – 2025/26)                        |
-| Database             | None (in-memory)          | PostgreSQL + TimescaleDB                                |
+| Database             | None (in-memory)          | PostgreSQL                                              |
 | Similarity filters   | Basic                     | Age, salary, value, release clause, league, nationality |
 | Player profile       | Static                    | Historical charts with economic evolution               |
 | Data freshness       | N/A                       | Live indicator + scrape log                             |
