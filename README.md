@@ -23,6 +23,7 @@ The core methodology follows the paper exactly:
 - Club Replaceability Index: `R_club = (1/N)·Σ(1 − U_i)`
 
 **Key improvements over the CSV-based MVP:**
+Here is MVP url made by @davidsuarezgnz: https://github.com/davidsuarezgnz/mit-paper-scouting-intelligence
 
 | Feature              | MVP                       | SoccerSolver                                            |
 | -------------------- | ------------------------- | ------------------------------------------------------- |
