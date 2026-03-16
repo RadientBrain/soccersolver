@@ -7,6 +7,8 @@
 **Live demo:** https://soccersolver.vercel.app (not hosted now)
 **API docs:** https://soccersolver-api.railway.app/docs (not hosted now)
 
+Improvement tried upon: https://github.com/davidsuarezgnz/mit-paper-mvp
+
 ---
 
 ## What this is
