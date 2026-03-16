@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #1a7a4a;
+  --green-light: #e8f5ee;
+  --dark: #0f1923;
+  --card: #1c2a36;
+}
+
+body {
+  background: var(--dark);
+  color: #e0e8f0;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.stat-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: #2a3a4a;
+  overflow: hidden;
+}
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
