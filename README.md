@@ -1,7 +1,7 @@
 # SoccerSolver — Player Similarity & Scouting Intelligence
 
 > An improved parallel implementation of the MIT Sports Analytics Conference paper  
-> *"Redefining Scouting Intelligence"* (Paper ID 36) — with real scraped economic data,  
+> _"Redefining Scouting Intelligence"_ (Paper ID 36) — with real scraped economic data,  
 > multi-season historical evolution, and a full-stack web platform.
 
 **Live demo:** https://soccersolver.vercel.app  
@@ -14,6 +14,7 @@
 This is a **standalone improved version** of the MVP — not a modification of it.
 
 The core methodology follows the paper exactly:
+
 - Z-score normalisation per position group
 - PCA (90% cumulative variance threshold) per positional subset
 - K-Means clustering with silhouette scoring (Rousseeuw, 1987)
@@ -23,16 +24,16 @@ The core methodology follows the paper exactly:
 
 **Key improvements over the CSV-based MVP:**
 
-| Feature | MVP | SoccerSolver |
-|---|---|---|
-| Data source | Static CSV (FIFA ratings) | Live SoFIFA scraper |
-| Economic data | ❌ None | ✅ Salary, market value, release clause |
-| Historical evolution | ❌ Single season | ✅ 3 seasons (2022/23 – 2025/26) |
-| Database | None (in-memory) | PostgreSQL + TimescaleDB |
-| Similarity filters | Basic | Age, salary, value, release clause, league, nationality |
-| Player profile | Static | Historical charts with economic evolution |
-| Data freshness | N/A | Live indicator + scrape log |
-| UI | Streamlit | React + Vite |
+| Feature              | MVP                       | SoccerSolver                                            |
+| -------------------- | ------------------------- | ------------------------------------------------------- |
+| Data source          | Static CSV (FIFA ratings) | Live SoFIFA scraper                                     |
+| Economic data        | ❌ None                   | ✅ Salary, market value, release clause                 |
+| Historical evolution | ❌ Single season          | ✅ 3 seasons (2022/23 – 2025/26)                        |
+| Database             | None (in-memory)          | PostgreSQL + TimescaleDB                                |
+| Similarity filters   | Basic                     | Age, salary, value, release clause, league, nationality |
+| Player profile       | Static                    | Historical charts with economic evolution               |
+| Data freshness       | N/A                       | Live indicator + scrape log                             |
+| UI                   | Streamlit                 | React + Vite                                            |
 
 > **Accuracy note:** Using SoFIFA public data introduces approximately 5–10% accuracy reduction  
 > compared to proprietary data (as noted in the paper, Section 5). This is an expected trade-off  
@@ -42,14 +43,14 @@ The core methodology follows the paper exactly:
 
 ## Stack
 
-| Layer | Technology | Reason |
-|---|---|---|
-| Scraper | Python + Playwright | SoFIFA is JS-rendered; requests/BeautifulSoup won't work |
-| ML pipeline | scikit-learn, pandas, numpy | Matches paper methodology exactly |
-| Database | PostgreSQL + TimescaleDB | Paper's own architecture; TimescaleDB for time-partitioned player stats |
-| API | FastAPI | Fast, async, auto-generated OpenAPI docs |
-| Frontend | React + Vite + Tailwind | Modern, fast, component-based |
-| Deploy | Railway (DB + API) + Vercel (FE) | Railway supports TimescaleDB extension natively |
+| Layer       | Technology                       | Reason                                                                  |
+| ----------- | -------------------------------- | ----------------------------------------------------------------------- |
+| Scraper     | Python + Playwright              | SoFIFA is JS-rendered; requests/BeautifulSoup won't work                |
+| ML pipeline | scikit-learn, pandas, numpy      | Matches paper methodology exactly                                       |
+| Database    | PostgreSQL + TimescaleDB         | Paper's own architecture; TimescaleDB for time-partitioned player stats |
+| API         | FastAPI                          | Fast, async, auto-generated OpenAPI docs                                |
+| Frontend    | React + Vite + Tailwind          | Modern, fast, component-based                                           |
+| Deploy      | Railway (DB + API) + Vercel (FE) | Railway supports TimescaleDB extension natively                         |
 
 ---
 
@@ -59,6 +60,7 @@ For testing without scraping SoFIFA, use the mock data generator.
 This gives you a fully working system in ~3 minutes.
 
 ### Prerequisites
+
 - Docker + Docker Compose
 - Python 3.11+
 - Node.js 20+
@@ -66,7 +68,7 @@ This gives you a fully working system in ~3 minutes.
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/your-handle/soccersolver
+git clone https://github.com/RadientBrain/soccersolver
 cd soccersolver
 cp .env.example .env
 ```
@@ -139,6 +141,7 @@ python sofifa_scraper.py "2025/26"
 ```
 
 The scraper:
+
 - Uses Playwright (full Chromium browser) — required for JS-rendered pages
 - Applies 2–5 second random delays between requests
 - Rotates User-Agent headers
@@ -157,6 +160,7 @@ Historical seasons use SoFIFA's version URL parameter. Version IDs are hardcoded
 `SOFIFA_VERSIONS` dict in `sofifa_scraper.py`. Update them if SoFIFA changes their versioning.
 
 Known version IDs:
+
 - 2025/26 (current): no version param needed
 - 2024/25 (EA FC 25): `?version=240072`
 - 2023/24 (EA FC 24): `?version=230054`
@@ -177,13 +181,13 @@ Pipeline runtime: ~30–60 seconds for 500 players, ~3–5 minutes for 15,000+.
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|---|---|---|
-| `DATABASE_URL` | `postgresql://soccer:soccer123@localhost:5432/soccersolver` | PostgreSQL connection string |
-| `VITE_API_URL` | `http://localhost:8000` | API base URL for the frontend |
-| `POSTGRES_DB` | `soccersolver` | DB name (Docker Compose) |
-| `POSTGRES_USER` | `soccer` | DB user (Docker Compose) |
-| `POSTGRES_PASSWORD` | `soccer123` | DB password (Docker Compose) |
+| Variable            | Default                                                     | Description                   |
+| ------------------- | ----------------------------------------------------------- | ----------------------------- |
+| `DATABASE_URL`      | `postgresql://soccer:soccer123@localhost:5432/soccersolver` | PostgreSQL connection string  |
+| `VITE_API_URL`      | `http://localhost:8000`                                     | API base URL for the frontend |
+| `POSTGRES_DB`       | `soccersolver`                                              | DB name (Docker Compose)      |
+| `POSTGRES_USER`     | `soccer`                                                    | DB user (Docker Compose)      |
+| `POSTGRES_PASSWORD` | `soccer123`                                                 | DB password (Docker Compose)  |
 
 ---
 
@@ -229,20 +233,20 @@ soccersolver/
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/seasons` | Available seasons |
-| GET | `/api/leagues?season=` | Leagues in a season |
-| GET | `/api/data-freshness` | Scrape log — last update times |
-| GET | `/api/players/search` | Search + filter players |
-| GET | `/api/players/{id}` | Full player profile |
-| GET | `/api/players/{id}/history` | Historical evolution across seasons |
-| GET | `/api/players/{id}/similar` | Top-N similar players with filters |
-| GET | `/api/analytics/uniqueness` | Uniqueness index rankings |
-| GET | `/api/analytics/replaceability` | Club replaceability rankings |
-| GET | `/api/analytics/position-uniqueness` | Stats per position (Table 1) |
-| GET | `/api/analytics/temporal-uniqueness` | Uniqueness over time (Figure 4) |
-| GET | `/api/clubs/{name}/players` | All players for a club |
+| Method | Endpoint                             | Description                         |
+| ------ | ------------------------------------ | ----------------------------------- |
+| GET    | `/api/seasons`                       | Available seasons                   |
+| GET    | `/api/leagues?season=`               | Leagues in a season                 |
+| GET    | `/api/data-freshness`                | Scrape log — last update times      |
+| GET    | `/api/players/search`                | Search + filter players             |
+| GET    | `/api/players/{id}`                  | Full player profile                 |
+| GET    | `/api/players/{id}/history`          | Historical evolution across seasons |
+| GET    | `/api/players/{id}/similar`          | Top-N similar players with filters  |
+| GET    | `/api/analytics/uniqueness`          | Uniqueness index rankings           |
+| GET    | `/api/analytics/replaceability`      | Club replaceability rankings        |
+| GET    | `/api/analytics/position-uniqueness` | Stats per position (Table 1)        |
+| GET    | `/api/analytics/temporal-uniqueness` | Uniqueness over time (Figure 4)     |
+| GET    | `/api/clubs/{name}/players`          | All players for a club              |
 
 Full interactive docs at `/docs` (Swagger UI).
 
@@ -257,6 +261,7 @@ pytest test_integration.py -v
 ```
 
 Tests cover:
+
 1. DB connection
 2. Player data exists
 3. ML pipeline results populated (uniqueness index)
@@ -347,6 +352,6 @@ sim_matrix = hybrid_similarity(X_pca, alpha=0.5)  # adjust alpha here
 
 ## Paper Reference
 
-Suárez, D. et al. (2024). *Redefining Scouting Intelligence: A Quantitative Framework  
-for Player Similarity and Tactical Fit in Modern Football.* MIT Sloan Sports Analytics  
+Suárez, D. et al. (2024). _Redefining Scouting Intelligence: A Quantitative Framework  
+for Player Similarity and Tactical Fit in Modern Football._ MIT Sloan Sports Analytics  
 Conference, Paper ID 36.
